@@ -6,7 +6,8 @@ Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e
 
 - [Python 3.10 ou superior instalado](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
-- [Docker](https://www.docker.com/get-started/)
+
+O Docker não é necessário para a execução local; esta versão não possui Dockerfile.
 
 ## Passos para subir o projeto
 
@@ -23,14 +24,12 @@ Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e
      ```sh
      source venv/bin/activate
      ```
-   - No Windows, abra um terminal no modo administrador e execute o comando:
-   ```sh
-   Set-ExecutionPolicy RemoteSigned
-   ```
-
+   - No Windows PowerShell:
      ```sh
-     venv\Scripts\activate
+     .\venv\Scripts\Activate.ps1
      ```
+
+   Se a ativação estiver indisponível, use `.\venv\Scripts\python.exe -m pip install -r requirements.txt` e `.\venv\Scripts\python.exe -m uvicorn app:app --reload` sem alterar a política do sistema.
 
 4. **Instale as dependências:**
    ```sh
@@ -60,9 +59,19 @@ Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e
 - `routers/`: Diretório com os arquivos de rotas (alunos, cursos, matrículas).
 - `requirements.txt`: Lista de dependências do projeto.
 
+## Recursos implementados
+
+| Recurso | Operações |
+| --- | --- |
+| `/alunos` | Listar, cadastrar, atualizar, remover e consultar por ID, nome ou e-mail |
+| `/cursos` | Listar, cadastrar, atualizar e consultar por código |
+| `/matriculas` | Cadastrar matrícula e consultar por nome do aluno ou código do curso |
+
+A API usa FastAPI, Pydantic, SQLAlchemy e SQLite. A interface OpenAPI/Swagger está em `/docs`. Esta é uma versão educacional, sem autenticação ou implantação em nuvem configurada neste repositório.
+
 ---
 
 - O banco de dados SQLite será criado automaticamente como `escola.db` na primeira execução.
-- Para reiniciar o banco, basta apagar o arquivo `escola.db` (isso apagará todos os dados).
+- Para reiniciar o banco, faça backup do arquivo `escola.db` antes de removê-lo: a remoção exclui todos os dados locais.
 
 ---
